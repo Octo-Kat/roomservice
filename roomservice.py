@@ -102,7 +102,7 @@ def get_from_manifest(devicename):
         lm = ElementTree.Element("manifest")
 
     for localpath in lm.findall("project"):
-        if re.search("android_device_.*_%s$" % device, localpath.get("name")):
+        if re.search("platform_device_.*_%s$" % device, localpath.get("name")):
             return localpath.get("path")
 
     # Devices originally from AOSP are in the main manifest...
@@ -113,7 +113,7 @@ def get_from_manifest(devicename):
         mm = ElementTree.Element("manifest")
 
     for localpath in mm.findall("project"):
-        if re.search("android_device_.*_%s$" % device, localpath.get("name")):
+        if re.search("platform_device_.*_%s$" % device, localpath.get("name")):
             return localpath.get("path")
 
     return None
@@ -213,10 +213,10 @@ if depsonly:
 else:
     for repository in repositories:
         repo_name = repository['name']
-        if repo_name.startswith("android_device_") and repo_name.endswith("_" + device):
+        if repo_name.startswith("platform_device_") and repo_name.endswith("_" + device):
             print "Found repository: %s" % repository['name']
             
-            manufacturer = repo_name.replace("android_device_", "").replace("_" + device, "")
+            manufacturer = repo_name.replace("platform_device_", "").replace("_" + device, "")
             
             default_revision = get_default_revision()
             print "Default revision: %s" % default_revision
