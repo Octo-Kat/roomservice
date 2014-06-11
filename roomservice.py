@@ -34,7 +34,7 @@ except:
     device = product
 
 if not depsonly:
-    print "Device %s not found. Attempting to retrieve device repository from Team-OctOS Github (http://github.com/Octo-Kat)." % device
+    print "Device %s not found. Attempting to retrieve device repository from Team-OctOS Github (http://github.com/)." % device
 
 repositories = []
 
@@ -54,7 +54,7 @@ def add_auth(githubreq):
 
 page = 1
 while not depsonly:
-    githubreq = urllib2.Request("https://api.github.com/users/Octo-Kat/repos?per_page=100&page=%d" % page)
+    githubreq = urllib2.Request("https://api.github.com/users//repos?per_page=100&page=%d" % page)
     add_auth(githubreq)
     result = json.loads(urllib2.urlopen(githubreq).read())
     if len(result) == 0:
@@ -144,7 +144,7 @@ def add_to_manifest(repositories, fallback_branch = None):
         if 'project' in repository:
             repo_project = repository['project']
         else:
-            repo_project = 'Octo-Kat'
+            repo_project = ''
         if exists_in_tree(lm, repo_name):
             print '%s/%s already exists' % (repo_project, repo_name)
             continue
@@ -182,7 +182,7 @@ def fetch_dependencies(repo_path, fallback_branch = None):
         fetch_list = []
 
         for dependency in dependencies:
-            if not is_in_manifest("Octo-Kat/%s" % dependency['repository']):
+            if not is_in_manifest("/%s" % dependency['repository']):
                 fetch_list.append(dependency)
                 syncable_repos.append(dependency['target_path'])
 
@@ -232,7 +232,7 @@ else:
                 result = json.loads(urllib2.urlopen(githubreq).read())
             
             repo_path = "device/%s/%s" % (manufacturer, device)
-            adding = {'project':'Octo-Kat', 'repository':repo_name, 'target_path':repo_path}
+            adding = {'project':'', 'repository':repo_name, 'target_path':repo_path}
             
             fallback_branch = None
             if not has_branch(result, default_revision):
