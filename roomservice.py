@@ -89,7 +89,7 @@ def indent(elem, level=0):
             elem.tail = i
 
 def get_default_revision():
-    m = ElementTree.parse(".repo/manifests/default.xml")
+    m = ElementTree.parse(".repo/local_manifests/ok_manifest.xml")
     d = m.findall('default')[0]
     r = d.get('tag')
     return r.split('/')[-1]
