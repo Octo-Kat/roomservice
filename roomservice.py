@@ -89,9 +89,9 @@ def indent(elem, level=0):
             elem.tail = i
 
 def get_default_revision():
-    m = ElementTree.parse(".repo/manifests/default.xml")
+    m = ElementTree.parse(".repo/local_manifests/ok_default.xml")
     d = m.findall('default')[0]
-    r = d.get('branch')
+    r = d.get('tag')
     return r.split('/')[-1]
 
 def get_from_manifest(devicename):
@@ -234,7 +234,7 @@ else:
             repo_path = "device/%s/%s" % (manufacturer, device)
             adding = {'project':'Octo-Kat', 'repository':repo_name, 'target_path':repo_path}
             
-            fallback_branch = 4.4
+            fallback_branch = None
             if not has_branch(result, default_revision):
                 if os.getenv('ROOMSERVICE_BRANCHES'):
                     fallbacks = filter(bool, os.getenv('ROOMSERVICE_BRANCHES').split(' '))
