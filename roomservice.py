@@ -234,7 +234,7 @@ else:
             repo_path = "device/%s/%s" % (manufacturer, device)
             adding = {'project':'Octo-Kat', 'repository':repo_name, 'target_path':repo_path}
             
-            fallback_branch = None
+            fallback_branch = 4.4
             if not has_branch(result, default_revision):
                 if os.getenv('ROOMSERVICE_BRANCHES'):
                     fallbacks = filter(bool, os.getenv('ROOMSERVICE_BRANCHES').split(' '))
